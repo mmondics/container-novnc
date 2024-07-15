@@ -5,10 +5,13 @@ ENV WEBSOCKIFY_TAG="v0.11.0"
 
 WORKDIR /app/noVNC
 
+# Enable EPEL repository and install necessary packages
 RUN yum install -y \
-      hostname git procps-ng python3 python3-pip gcc gcc-c++ gcc-gfortran make openblas-devel && \
-      yum -y clean all && \
-      rm -rf /var/cache
+      epel-release && \
+    yum install -y \
+      hostname git procps-ng python3 python3-pip gcc gcc-c++ gcc-gfortran make openblas openblas-devel && \
+    yum -y clean all && \
+    rm -rf /var/cache
 
 # Ensure Cython is installed correctly
 RUN pip3 install --upgrade --no-cache-dir Cython==0.29.24
