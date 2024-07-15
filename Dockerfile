@@ -6,7 +6,7 @@ ENV WEBSOCKIFY_TAG="v0.11.0"
 WORKDIR /app/noVNC
 
 RUN yum install -y \
-      hostname git procps-ng python3 python3-pip && \
+      hostname git procps-ng python3 python3-pip gcc gcc-c++ gcc-gfortran make openblas-devel && \
       yum -y clean all && \
       rm -rf /var/cache
 
