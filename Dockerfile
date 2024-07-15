@@ -6,7 +6,7 @@ ENV WEBSOCKIFY_TAG="v0.11.0"
 WORKDIR /app/noVNC
 
 RUN yum install -y \
-      hostname git procps-ng python3 python3-pip gcc gcc-c++ gcc-gfortran make && \
+      hostname git procps-ng python3 python3-pip python3-devel gcc gcc-c++ gcc-gfortran make && \
     yum -y clean all && \
     rm -rf /var/cache
 
