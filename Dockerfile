@@ -10,9 +10,14 @@ RUN yum install -y \
       yum -y clean all && \
       rm -rf /var/cache
 
-RUN pip3 install --upgrade --no-cache-dir numpy && \  
-    git clone --depth 1 --branch ${NOVNC_TAG} https://github.com/novnc/noVNC.git /app/noVNC && \
-	git clone --depth 1 --branch ${WEBSOCKIFY_TAG} https://github.com/kanaka/websockify /app/noVNC/utils/websockify && \
+# Ensure Cython is installed correctly
+RUN pip3 install --upgrade --no-cache-dir Cython==0.29.24
+
+# Install numpy separately
+RUN pip3 install --upgrade --no-cache-dir numpy==1.19.5
+
+RUN git clone --depth 1 --branch ${NOVNC_TAG} https://github.com/novnc/noVNC.git /app/noVNC && \
+    git clone --depth 1 --branch ${WEBSOCKIFY_TAG} https://github.com/kanaka/websockify /app/noVNC/utils/websockify && \
     ln -s vnc.html index.html && \
     chmod 775 -R /app && \
     chgrp 0 -R /app
